@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  s3:
+    image: minio/minio:latest
+    ports:
+      - 9000:9000
+      - 9001:9001
+    environment:
+      MINIO_ACCESS_KEY: "8P63VX5Qh8KWcnuVmDAjQ687LdV3n5"
+      MINIO_SECRET_KEY: "Z4aPQZ3uxmVJkfhuR73GZzVLaymnAJGsAh9XYANyYYcjCcWFEFFACC3fPeYagUnmignFUCxQF46Qz9TG"
+    volumes:
+      - /srv/dev-disk-by-uuid-7568fd20-861a-4307-aafb-adbb0e64ca2a/global-sync/Sync/NFS/ServerShare/s3/data:/data
+      - /srv/dev-disk-by-uuid-7568fd20-861a-4307-aafb-adbb0e64ca2a/global-sync/Sync/NFS/ServerShare/s3/config:/root/.minio
+    command: "minio server /data --address :9000 --console-address :9001"
